@@ -18,6 +18,7 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 
 # from models import Person
 
@@ -25,6 +26,16 @@ ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
+
+CORS(app, resources={r"/api/*": {"origins": "*", "methods": "*", "allow_headers": "Content-Type"}})
+
+# Añadir un manejador para las solicitudes OPTIONS
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
+
 bcrypt = Bcrypt(app)
 app.url_map.strict_slashes = False
 

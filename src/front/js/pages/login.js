@@ -22,15 +22,15 @@ export const Login = () => {
         };
 
         try {
-            const response = await fetch(process.env.BACKEND_URL + '/login', requestOptions);
+            const response = await fetch(process.env.BACKEND_URL + 'login', requestOptions);
             const data = await response.json();
 
             if (response.ok) {
-                // Manejar la respuesta exitosa, por ejemplo, almacenar el token en el estado global
-                console.log('Inicio de sesión exitoso', data.token);
-                // Puedes limpiar los campos después de un inicio de sesión exitoso
-                setEmail('');
-                setPassword('');
+                // Almacenar el token en el sessionStorage
+                sessionStorage.setItem('token', data.token);
+            
+                // Redirigir a la ruta /protected
+                window.location.href = '/private';
             } else {
                 // Manejar la respuesta de error
                 console.error('Error en el inicio de sesión', data.msg);
