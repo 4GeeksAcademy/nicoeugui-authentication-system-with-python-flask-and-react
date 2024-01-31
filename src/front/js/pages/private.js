@@ -16,35 +16,29 @@ const Private = () => {
         //lógica relacionada con la carga de datos o recursos privados
     }, [navigate]);
 
+    const logout = () => {
+        // Borrar el token del sessionStorage al hacer clic en el botón de logout
+        sessionStorage.removeItem('token');
+        // Redirigir al usuario a la página de inicio de sesión
+        navigate('/login');
+    };
+
     return (
         <>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Mi Aplicación</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout">Cerrar Sesión</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+                {/* ... (código del navbar) */}
             </nav>
 
-            <div class="container mt-5">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="card-title">¡Bienvenido a la Página Privada!</h1>
-                        <p class="card-text">Has iniciado sesión con éxito.</p>
+            <div className="container mt-5">
+                <div className="card">
+                    <div className="card-body">
+                        <h1 className="card-title">¡Bienvenido a la Página Privada!</h1>
+                        <p className="card-text">Has iniciado sesión con éxito.</p>
+                        <button className="btn btn-danger" onClick={logout}>Cerrar Sesión</button>
                     </div>
                 </div>
             </div>
         </>
-
     );
 };
 
